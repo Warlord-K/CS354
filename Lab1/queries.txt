@@ -4,8 +4,19 @@ swipl -s examples.pl
 
 git add .; git commit -m "Add Stuff"; git push
 
+
+kb1:
+
 valuable(gold).
 
 father(mary,joe).
 
 father(joe,mary).
+
+owns(mary, X); valuable(X).
+
+kb2:
+
+dislikes(nick, X).
+
+likes(nick, X).
