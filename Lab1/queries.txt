@@ -1,0 +1,11 @@
+commands:
+
+swipl -s examples.pl
+
+git add .; git commit -m "Add Stuff"; git push
+
+valuable(gold).
+
+father(mary,joe).
+
+father(joe,mary).
