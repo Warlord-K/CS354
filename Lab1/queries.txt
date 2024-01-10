@@ -26,3 +26,7 @@ likes(nick, X), good(X).
 kb3:
 
 likes(robert,_),likes(mary,_).
+
+kb4: 
+
+likes(jim,Y).
