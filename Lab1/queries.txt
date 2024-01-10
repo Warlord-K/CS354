@@ -20,3 +20,5 @@ kb2:
 dislikes(nick, X).
 
 likes(nick, X).
+
+likes(nick, X), good(X).
