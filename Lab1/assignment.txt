@@ -1,5 +1,0 @@
-q1:
-    drinks(X, orangejuice), owns(X, zebra).
-
-q2:
-    soldier(aardvark, _), soldier(flume, _).
