@@ -22,3 +22,7 @@ dislikes(nick, X).
 likes(nick, X).
 
 likes(nick, X), good(X).
+
+kb3:
+
+likes(robert,_),likes(mary,_).
