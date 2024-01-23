@@ -1,3 +1,5 @@
+export LAB=Lab2
+
 add:
 	@read -p "Commit Message: " mess; \
 	git add .; \
@@ -5,5 +7,5 @@ add:
 	git push
 
 run:
-	@read -p "Prolog Knowledge Base: " kb; \
-	swipl -s $$kb
+	@read -p "Question Number: " kb; \
+	swipl -s $$LAB/q$$kb.pl
