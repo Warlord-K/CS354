@@ -1,4 +1,4 @@
-gcd(X,0,X) :- X > 0.
-gcd(X,Y,G) :- Y > 0, Z is X mod Y, gcd(Y,Z,G).
+gcd(N,0,N) :- N > 0, !.
+gcd(N,M,GCD) :- M > 0, R is N mod M, gcd(M,R,GCD).
 
-coprime(X,Y) :- gcd(X,Y,1).
+coprime(N,M) :- gcd(N,M,1).
