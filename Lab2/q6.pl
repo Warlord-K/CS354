@@ -1,3 +1,3 @@
-my_flatten(X,[X]) :- \+ is_list(X).
-my_flatten([],[]).
-my_flatten([X|Xs],Zs) :- my_flatten(X,Y), my_flatten(Xs,Ys), append(Y,Ys,Zs).
+my_flatten([],[]):- !.
+my_flatten(A,[A]) :- \+ is_list(A).
+my_flatten([A|A1],C1) :- my_flatten(A,B), my_flatten(A1,B1), append(B,B1,C1).
