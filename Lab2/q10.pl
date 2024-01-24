@@ -1,3 +1,8 @@
+lsort(InList,OutList) :-
+	add_key(InList,KList),
+	keysort(KList,SKList),
+	rem_key(SKList,OutList).
+
 add_key([],[]).
 add_key([X|Xs],[L-p(X)|Ys]) :-!, 
 	length(X,L), add_key(Xs,Ys).
