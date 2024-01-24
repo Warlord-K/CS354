@@ -1,4 +1,4 @@
-export LAB=Lab3
+export LAB=Lab2
 
 add:
 	@read -p "Commit Message: " mess; \
