@@ -93,7 +93,7 @@ for gate_name, data in GATES.items():
     init_weights = [0, 0, 0]
     learning_rate = 0.2
     num_epochs = -1
-    init_bias = 1
+    init_bias = 0
     print(f"Gate: {gate_name}")
     print(
         f"Running Training...\nHyperparameters:\nInitial Weights: {init_weights}\nLearning Rate: {learning_rate}\nThreshold: {theta}\nBias: {init_bias}"
