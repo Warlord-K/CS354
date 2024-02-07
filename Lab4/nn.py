@@ -53,11 +53,11 @@ def forward(weights, data, threshold, bias):
 GATES = {"AND": AND_DATA, "OR": OR_DATA, "NAND": NAND_DATA, "NOR": NOR_DATA}
 
 for gate_name, data in GATES.items():
-    theta = 0
-    init_weights = [0, 0]
+    theta = -1
+    init_weights = [1, 2]
     learning_rate = 0.2
     num_epochs = -1
-    init_bias = 0
+    init_bias = 0.5
     print(f"Gate: {gate_name}")
     print(
         f"Running Training...\nHyperparameters:\nInitial Weights:{init_weights}\nLearning Rate:{learning_rate}\nThreshold:{theta}\nBias:{init_bias}"

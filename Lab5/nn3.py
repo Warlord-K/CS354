@@ -43,7 +43,20 @@ NOR_DATA = [
 ]
 
 
-def perceptron(weights, data, learning_rate, num_epochs, threshold=0, bias=0):
+def relu(x):
+    if x < 0:
+        return 0
+    return x > 0.5
+
+e = 1e1
+
+def sigmoid(x):
+    return int(1/(1 + e**(-1*x)) >= 0.5)
+
+def tanh(x):
+    return int((e**x - e**(-1*x))/(e**x + e**(-1*x)) > 0)
+
+def perceptron(weights, data, learning_rate, num_epochs, act, bias=0):
     input_size = len(weights)
     if num_epochs == -1:
         num_epochs = 1000
@@ -53,10 +66,8 @@ def perceptron(weights, data, learning_rate, num_epochs, threshold=0, bias=0):
             output = bias
             for weight, input in zip(weights, d[:input_size]):
                 output += weight * input
-            if output > threshold:
-                output = 1
-            else:
-                output = 0
+            output = act(output)
+            # print(output)
             if d[-1] - output:
                 for i in range(len(weights)):
                     # print(learning_rate, (d[-1]-output), input)
@@ -73,38 +84,35 @@ def perceptron(weights, data, learning_rate, num_epochs, threshold=0, bias=0):
     return weights, bias
 
 
-def forward(weights, data, threshold, bias):
+def forward(weights, data, act, bias):
     input_size = len(weights)
     output = 0
     for weight, input in zip(weights, data[:input_size]):
         output += weight * input
     output += bias
-    if output > threshold:
-        output = 1
-    else:
-        output = 0
+    output = act(output)
     return output
 
 
 GATES = {"AND": AND_DATA, "OR": OR_DATA, "NAND": NAND_DATA, "NOR": NOR_DATA}
-
-for gate_name, data in GATES.items():
-    theta = -1
-    init_weights = [1, 2, 3]
-    learning_rate = 0.2
-    num_epochs = -1
-    init_bias = 0.5
-    print(f"Gate: {gate_name}")
-    print(
-        f"Running Training...\nHyperparameters:\nInitial Weights: {init_weights}\nLearning Rate: {learning_rate}\nThreshold: {theta}\nBias: {init_bias}"
-    )
-    weights, bias = perceptron(
-        init_weights, data, learning_rate, num_epochs, theta, init_bias
-    )
-    print(f"\nFinal Weights: {weights}\nFinal Bias: {bias}")
-    print("\nRunning Validation...")
-    for d in data:
+ACTIVATIONS = {"tanh": tanh, "relu": relu, "sigmoid":sigmoid}
+for act in ACTIVATIONS:
+    for gate_name, data in GATES.items():
+        init_weights = [0, 0, 0]
+        learning_rate = 0.2
+        num_epochs = -1
+        init_bias = 0
+        print(f"Gate: {gate_name}")
         print(
-            f"Input: {d[:-1]} \nOutput: {forward(weights, d, theta, bias)}\nActual Value: {d[-1]}"
+            f"Running Training...\nHyperparameters:\nInitial Weights:{init_weights}\nLearning Rate:{learning_rate}\nActivation:{act}\nBias:{init_bias}"
         )
-    print("\n\n\n\n\n")
+        weights, bias = perceptron(
+            init_weights, data, learning_rate, num_epochs, ACTIVATIONS[act], init_bias
+        )
+        print(f"\nFinal Weights:{weights}\nFinal Bias:{bias}")
+        print("\nRunning Validation...")
+        for d in data:
+            print(
+                f"Input: {d[:-1]} \nOutput:{forward(weights, d, ACTIVATIONS[act], bias)}\nActual Value:{d[-1]}"
+            )
+        print("\n\n")
