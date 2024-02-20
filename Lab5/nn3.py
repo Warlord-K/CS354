@@ -98,21 +98,21 @@ GATES = {"AND": AND_DATA, "OR": OR_DATA, "NAND": NAND_DATA, "NOR": NOR_DATA}
 ACTIVATIONS = {"tanh": tanh, "relu": relu, "sigmoid":sigmoid}
 for act in ACTIVATIONS:
     for gate_name, data in GATES.items():
-        init_weights = [0, 0, 0]
-        learning_rate = 0.2
+        init_weights = [-1, 2, -3]
+        learning_rate = 0.4
         num_epochs = -1
-        init_bias = 0
+        init_bias = -0.5
         print(f"Gate: {gate_name}")
         print(
-            f"Running Training...\nHyperparameters:\nInitial Weights:{init_weights}\nLearning Rate:{learning_rate}\nActivation:{act}\nBias:{init_bias}"
+            f"Running Training...\nHyperparameters:\nInitial Weights: {init_weights}\nLearning Rate: {learning_rate}\nActivation: {act}\nBias: {init_bias}"
         )
         weights, bias = perceptron(
             init_weights, data, learning_rate, num_epochs, ACTIVATIONS[act], init_bias
         )
-        print(f"\nFinal Weights:{weights}\nFinal Bias:{bias}")
+        print(f"\nFinal Weights: {weights}\nFinal Bias: {bias}")
         print("\nRunning Validation...")
         for d in data:
             print(
-                f"Input: {d[:-1]} \nOutput:{forward(weights, d, ACTIVATIONS[act], bias)}\nActual Value:{d[-1]}"
+                f"Input: {d[:-1]} \nOutput: {forward(weights, d, ACTIVATIONS[act], bias)}\nActual Value: {d[-1]}"
             )
         print("\n\n")
